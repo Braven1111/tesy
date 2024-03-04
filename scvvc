@@ -66,7 +66,31 @@ pcall(function()
 
 		
             }
-
+ function CheckAcientOneStatus()
+    if not game.Players.LocalPlayer.Character:FindFirstChild("RaceTransformed") then
+        return "You have yet to achieve greatness"
+    end
+    
+    local v227, v228, v229 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("UpgradeRace", "Check")
+    
+    if v229 == 1 then
+        return "Required Train More"
+    elseif v229 == 2 or v229 == 4 or v229 == 7 then
+        return "Can Buy Gear With " .. v227 .. " Fragments"
+    elseif v229 == 3 then
+        return "Required Train More"
+    elseif v229 == 5 then
+        return "You Are Done Your Race."
+    elseif v229 == 6 then
+        return "Upgrades completed: " .. v228 - 2 .. "/3, Need Trains More"
+    elseif v229 == 0 then
+        return "Ready For Trial"
+    elseif v229 == 8 then
+        return "Remaining " .. 10 - v228 .. " Full Gear"
+    else
+        return "You have yet to achieve greatness"
+    end
+end
             local CommF = game.ReplicatedStorage.Remotes.CommF_
             local race = " V1"
 
@@ -213,31 +237,7 @@ end
             }
 
 	
-            function CheckAcientOneStatus()
-    if not game.Players.LocalPlayer.Character:FindFirstChild("RaceTransformed") then
-        return "You have yet to achieve greatness"
-    end
-    
-    local v227, v228, v229 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("UpgradeRace", "Check")
-    
-    if v229 == 1 then
-        return "Required Train More"
-    elseif v229 == 2 or v229 == 4 or v229 == 7 then
-        return "Can Buy Gear With " .. v227 .. " Fragments"
-    elseif v229 == 3 then
-        return "Required Train More"
-    elseif v229 == 5 then
-        return "You Are Done Your Race."
-    elseif v229 == 6 then
-        return "Upgrades completed: " .. v228 - 2 .. "/3, Need Trains More"
-    elseif v229 == 0 then
-        return "Ready For Trial"
-    elseif v229 == 8 then
-        return "Remaining " .. 10 - v228 .. " Full Gear"
-    else
-        return "You have yet to achieve greatness"
-    end
-end
+           
 
 -- Lấy thông báo từ hàm CheckAcientOneStatus
 local statusMessage = CheckAcientOneStatus()
